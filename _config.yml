@@ -8,12 +8,12 @@ subtitle: ''
 description: ''
 keywords:
 author: He Zelin
-language: cn
+language: zh-CN
 timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://rainld.com
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -40,7 +40,12 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
+# 👇 把下面这段完整添加到 _config.yml 中（注意缩进对齐）
+marked:
+  prependRoot: true
+  postAsset: true
+#上面
 relative_link: false
 future: true
 syntax_highlighter: highlight.js
@@ -104,3 +109,16 @@ deploy:
   type: 'git'
   repo: https://github.com/johneisley/rainld-blog.git
   branch: main
+
+# 本地搜索
+search:
+  path: search.xml
+  field: all
+  content: true 
+  format: html
+
+# APlayer 音乐播放器配置
+aplayer:
+  meting: true
+  # 关键设置：关闭全局注入，防止每个页面都加载音乐播放器的多余代码，拖慢全站速度
+  asset_inject: false

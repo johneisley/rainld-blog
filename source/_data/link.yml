@@ -1,0 +1,12 @@
+- class_name: 友情链接
+  class_desc: 那些有趣的人和事
+  link_list:
+    - name: MrLiu1024
+      link: https://www.ljx1.com/
+      avatar: https://www.ljx1.com/img/avatar_hu_ca4b55be1b0243e8.webp
+      descr: MrLiu's Blog
+
+    - name: 月半菌的 Blog
+      link: https://www.ybjun.com/
+      avatar: https://www.ybjun.com/favicon/icon-light.ico
+      descr: 用通俗的语言，传递实用的干货，还有好玩的资源，尽在月半菌!
