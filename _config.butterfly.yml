@@ -18,10 +18,15 @@ nav:
   fixed: false
 
 menu:
-  # Home: / || fas fa-home
-  # List||fas fa-list:
-  #   Music: /music/ || fas fa-music
-  #   Movie: /movies/ || fas fa-video
+  首页: / || fas fa-home
+  归档: /archives/ || fas fa-archive
+  标签: /tags/ || fas fa-tags
+  分类: /categories/ || fas fa-folder-open
+  列表||fas fa-list:
+    音乐: /music/ || fas fa-music
+    电影: /movies/ || fas fa-video
+  友链: /link/ || fas fa-link
+  关于: /about/ || fas fa-heart 
 
 # --------------------------------------
 # Code Blocks Settings
@@ -46,17 +51,17 @@ code_blocks:
 # Formal:
 #   icon: link || the description || color
 social:
-  # fab fa-github: https://github.com/xxxxx || Github || '#24292e'
-  # fas fa-envelope: mailto:xxxxxx@gmail.com || Email || '#4a7dbe'
+  fab fa-github: https://github.com/xxxxx || Github || '#24292e'
+  fas fa-envelope: mailto:johneisley31@gmail.com || Email || '#4a7dbe'
 
 # --------------------------------------
 # Image Settings
 # --------------------------------------
 
-favicon: /img/favicon.png
+favicon: /img/quanqiu.png
 
 avatar:
-  img: /img/butterfly-icon.png
+  img: /img/b2bb226f485c2b24ee6016a497f49235.png
   effect: false
 
 # Disable all banner images
@@ -102,7 +107,8 @@ cover:
   archives_enable: true
   # When cover is not set, the default cover is displayed
   default_cover:
-    # - xxx.jpg
+    /img/bing1.jpg
+    /img/bing2.jpg
 
 # Replace Broken Images
 error_img:
@@ -119,11 +125,11 @@ post_meta:
   # Home Page
   page:
     # Choose: created / updated / both
-    date_type: created
+    date_type: both
     # Choose: date / relative
-    date_format: date
+    date_format: relative
     categories: true
-    tags: false
+    tags: true
     label: true
   post:
     # Choose: left / center
@@ -193,7 +199,7 @@ index_post_content:
 toc:
   post: true
   page: false
-  number: true
+  number: false
   expand: false
   # Only for post
   style_simple: false
@@ -428,7 +434,7 @@ copy:
     limit_count: 150
 
 wordcount:
-  enable: false
+  enable: true
   # Display the word count of the article in post meta
   post_wordcount: true
   # Display the time to read the article in post meta
@@ -483,17 +489,21 @@ search:
 
   # Local Search
   local_search:
+    enable: true
     # Preload the search data when the page loads.
-    preload: false
+    preload: true
     # Show top n results per article, show all results by setting to -1
     top_n_per_article: 1
     # Unescape html strings to the readable one.
     unescape: false
     # Enable pagination for search results
     pagination:
-      enable: false
+      enable: true
       # Number of search results per page
       hitsPerPage: 8
+    labels:
+      input_placeholder: "输入关键词搜索"
+      hits_empty: "没有找到与「${query}」相关的内容"
     CDN:
 
   # Docsearch
