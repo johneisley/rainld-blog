@@ -839,8 +839,8 @@ beautify:
 font:
   global_font_size:
   code_font_size:
- # 优先使用霞鹜文楷，如果加载失败，依次退化为苹果苹方、现代无衬线体、微软雅黑
-  font_family: "'LXGW WenKai', 'PingFang SC', 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"
+  # 优先调用系统原生 HarmonyOS 字体，次级调用 CDN 加载的 HarmonyOS Sans SC，最后降级备用
+  font_family: "'HarmonyOS Sans SC', 'HarmonyOS Sans', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif"
   code_font_family:
 
 # Font settings for the site title and site subtitle
@@ -1071,26 +1071,24 @@ css_prefix: true
 # Insert the code to head (before '</head>' tag) and the bottom (before '</body>' tag)
 inject:
   head:
-    # 霞鹜文楷字体
-    - '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css" />'
+    # 替换为 HarmonyOS Sans 鸿蒙字体 CDN
+    - '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans@1.0.0/style.css" />'
     - |
       <style>
-        /* 动态波浪定位与基础样式 */
+        /* 保持原有的动态波浪 CSS 不变 */
         .main-hero-waves-area {
           width: 100%;
           position: absolute;
-          bottom: -1px; /* 关键修正：向下偏移 1px，完美遮盖缝隙 */
+          bottom: -1px;
           left: 0;
           z-index: 5;
-          line-height: 0; /* 关键修正：消除容器内部的行高间隙 */
+          line-height: 0;
         }
         .waves-svg {
           width: 100%;
           height: 60px;
-          display: block; /* 关键修正：转为块级元素，消除 SVG 底部默认留白 */
+          display: block;
         }
-        
-        /* 下面的多层波浪动画保持不变... */
         .parallax > use {
           animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
         }
@@ -1098,12 +1096,10 @@ inject:
         .parallax > use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; fill: rgba(242, 133, 0, 0.5); }
         .parallax > use:nth-child(3) { animation-delay: -4s; animation-duration: 13s; fill: rgba(242, 133, 0, 0.7); }
         .parallax > use:nth-child(4) { animation-delay: -5s; animation-duration: 20s; fill: rgba(242, 133, 0, 0.9); }
-        /* 关键帧动画 */
         @keyframes move-forever {
           0% { transform: translate3d(-90px, 0, 0); }
           100% { transform: translate3d(85px, 0, 0); }
         }
-        /* 移动端高度适配 */
         @media (max-width: 768px) {
           .waves-svg { height: 40px; }
         }
