@@ -67,7 +67,7 @@ avatar:
 disable_top_img: false
 
 # If the banner of page not setting, it will show the default_top_img
-default_top_img: https://api.bingpics.ybjun.com/image/latest
+default_top_img: https://bingapi.ybjun.com/image/latest
 
 # The banner image of index page
 index_img: 
@@ -106,8 +106,8 @@ cover:
   archives_enable: true
   # When cover is not set, the default cover is displayed
   default_cover:
-    - /img/bing1.jpg
-    - /img/bing2.jpg
+    - https://bingapi.ybjun.com/image/latest
+    - https://bingapi.ybjun.com/image/latest/v
 
 # Replace Broken Images
 error_img:
