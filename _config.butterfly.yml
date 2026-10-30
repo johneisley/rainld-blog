@@ -447,9 +447,9 @@ wordcount:
 
 # Busuanzi count for PV / UV in site
 busuanzi:
-  site_uv: true
-  site_pv: true
-  page_pv: true
+  site_uv: false
+  site_pv: false
+  page_pv: false
 
 # --------------------------------------
 # Math
@@ -1071,8 +1071,6 @@ css_prefix: true
 # Insert the code to head (before '</head>' tag) and the bottom (before '</body>' tag)
 inject:
   head:
-    # 稳定修复版不蒜子（自带高可用节点支持，解决长久转圈问题）
-    - '<script defer src="https://busuanzi.9420.ltd/js"></script>'
     # 替换为 HarmonyOS Sans 鸿蒙字体 CDN
     - '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans@1.0.0/style.css" />'
     - |
@@ -1120,7 +1118,44 @@ inject:
           }
         });
       </script>
+    - |
+      <script>
+        // 2. 专属自建 PV 浏览量通信与页面挂载脚本
+        document.addEventListener('DOMContentLoaded', async () => {
+          // 仅在文章详情页加载并展示浏览量
+          const postMeta = document.querySelector('#post-info .post-meta-date');
+          if (!postMeta) return;
 
+          const WORKER_URL = 'https://pv.rainld.com';
+          const path = window.location.pathname;
+
+          // 创建 UI 展示容器（保持 Butterfly 主题风格）
+          const pvSpan = document.createElement('span');
+          pvSpan.id = 'rainld-pv-container';
+          pvSpan.className = 'post-meta-separator';
+          pvSpan.innerHTML = ' | <i class="fas fa-eye" style="margin-right: 4px;"></i>阅读量: <span id="rainld-pv-num"><i class="fas fa-spinner fa-spin"></i></span>';
+          postMeta.parentNode.appendChild(pvSpan);
+
+          try {
+            // 本地调试避免污染线上统计数据
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+              document.getElementById('rainld-pv-num').innerText = '99';
+              return;
+            }
+
+            const res = await fetch(`${WORKER_URL}?path=${encodeURIComponent(path)}`);
+            const data = await res.json();
+            if (data && typeof data.page_pv !== 'undefined') {
+              document.getElementById('rainld-pv-num').innerText = data.page_pv;
+            } else {
+              document.getElementById('rainld-pv-num').innerText = '1';
+            }
+          } catch (err) {
+            console.error('自建 PV 统计请求失败:', err);
+            document.getElementById('rainld-pv-num').innerText = '1';
+          }
+        });
+      </script>
 # CDN Settings
 # Don't modify the following settings unless you know how they work
 CDN:
@@ -1146,7 +1181,7 @@ CDN:
     # artalk_css:
     # artalk_js:
     # blueimp_md5:
-    # busuanzi: https://npm.elemecdn.com/penndu-busuanzi@2.3.4/busuanzi.pure.mini.js
+    # busuanzi: 
     # canvas_fluttering_ribbon:
     # canvas_nest:
     # canvas_ribbon:
